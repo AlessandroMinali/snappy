@@ -1,0 +1,20 @@
+<div id="container">
+<% @e = nil %>
+<% 6.times do |i| %>
+	<% 	
+	begin 
+		s = @snaps[i].name
+		@e = ''
+	rescue 
+		next
+	end %>
+	<div class="box" style="overflow: hidden;display:inline-block">
+		<a href="/<%= s %>"><p style="text-align:center;"><%= "#{s}" %></p></a>
+		<a href="/<%= s %>"><img width=300 height=187 src=<%= "#{s}.png" %>></a>
+	</div>
+<% end %>
+<% if @e.nil? %>
+<span style="position: relative; top:50px; letter-spacing:3px; font-weight:lighter;">why not give me some where to point this thing?<span>
+<% end %>
+</div>
+

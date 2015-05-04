@@ -1,0 +1,15 @@
+<script type="text/javascript" src="script/snaps.js"></script>
+<div id="container">
+	<h2><%= h params[:image] %></h2>
+
+	<div class="snap desktop" style="overflow: hidden;height: 400px;">
+		<p>Desktop (1440x900):</p>
+		<a href="/desktop/<%= @image %>.png"><img width=640 src="<%= @image %>.png" /></a>
+	</div>
+	<div class="snap mobile" style="overflow: hidden;height: 400px;">
+		<p>Mobile (640x960):</p>
+		<a href="/mobile/<%= @image %>.png"><img width=200 src="2<%= @image %>.png" /></a>
+	</div>
+</div>
+
+<div style="clear: both;"></div>

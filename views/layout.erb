@@ -1,0 +1,42 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Snappy</title>
+	<link rel="stylesheet" href="css/normalize.css">
+	<link rel="stylesheet" href="css/style.css">
+
+	<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"> -->
+
+	<!--[if lt IE 9]>
+	<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+</head>
+
+<body style="padding:0px;color: #333333;margin:0 auto;">
+	<div id="header">
+		<a href="/"><h1>SNAPPY</h1></a>
+		<p id="desc">A friendly screenshotting serivce for the web
+			<br>&#x25BE</p>
+		<form method="post" action="/snap">
+		<input id="search" type="search" name="url" text="enter the website you'd like to take a gander at" value="http://">
+		<!-- <input id="submit" type="submit" value="Snap!"> -->
+		</form>
+	</div>
+
+	<div id="main">
+		<%= 'RECENT PEEKS' if request.path_info == '/' %>
+		<%= yield %>
+	</div>
+
+	<footer>
+		<hr>
+		<div id="foot">
+			<a href="/api">API</a> <a href="/about">About</a> <a href="mailto:alessandrom.minali@gmail.com">Contact</a> <a href="https://www.paypal.com/ca/cgi-bin/webscr?cmd=_flow&SESSION=9Ps-PpsdH5o8DA-x7_F4xlHcdLV1MZQxYe2UXGumXTgCWDLxGGfMOOqubG0&dispatch=5885d80a13c0db1f8e263663d3faee8d96f000117187ac9edec8a65b311f447e">Support</a><span style="float:right;">Made by <a href="http://www.alessandrom.me">Alessandro Minali</a> 2015</span>
+		</div>
+	</footer>
+
+</body>
+</html>

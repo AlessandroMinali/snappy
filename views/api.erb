@@ -1,0 +1,13 @@
+<h2>Super simple api to get SNAPPY</h2>
+
+<p style="color:black;">Send an HTTP request like so: <code>GET <%= request.host %>/api/&lt;url&gt;</code><br>
+where <code>&lt;url&gt;</code> is a valid resolvable URI<br>(ie. 'google.ca' or 'github.com')
+</p>
+
+<p style="color:black;">The json response will be in the form of<br><code>{url: "http://google.ca",<br> desktop: "<%= request.host %>/desktop/google.ca.png",<br> mobile: "<%= request.host %>/mobile/google.ca.png"}</code><br>which are links to your snaps!</p>
+
+<p style="color:black;">Additionally if you are only interested in one snap view (ie. just mobile)<br>append either 'mobile' or 'desktop' and you will only wait for and recieve the one link:<br><br>(ie. <code>GET <%= request.host %>/api/google.ca/mobile</code><br>#=><br><code>{url: "http://google.ca", desktop: "", mobile: "<%= request.host %>/mobile/google.ca.png"}</code></p>
+
+<hr>
+<p style="color:black;">Currently at this time I have no success/error codes for requests. Sorry :(</p>
+<br>
