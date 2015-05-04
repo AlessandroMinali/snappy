@@ -1,2 +1,2 @@
-require '.snappy'
+require './snappy'
 run Sinatra::Application
