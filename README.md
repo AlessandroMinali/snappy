@@ -1,4 +1,4 @@
-#SNAPPY  
+#SNAPPY - https://snppy.herokuapp.com/  
 The sweet and simple screenshotter  
 Comes with a simple and free API
 
