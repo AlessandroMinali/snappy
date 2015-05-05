@@ -4,7 +4,7 @@ require 'uri'
 require 'data_mapper'
 require 'json'
 
-DataMapper::setup(:default, ENV['DATABASE_URL'] || "sqlite3://#{Dir.pwd}/gallery.db")
+DataMapper::setup(:default, ENV['DATABASE_URL'] || "postgres://#{Dir.pwd}/gallery.db")
 # DataMapper.setup(:default, ENV['DATABASE_URL'] || 'postgres://user:password@hostname/data/mydatabase.db')
 class Snapshot
   include DataMapper::Resource
