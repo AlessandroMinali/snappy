@@ -57,7 +57,10 @@ helpers do
       agent,
     ) { |k|
         p k
-        redirect to('/timeout') if k.chomp.include? 'timeout'
+        if k.chomp.include? 'timeout'
+          redirect to('/timeout')
+          return
+        end
         store @image if k.chomp.include? 'done'
     }
   end
@@ -92,6 +95,7 @@ post '/snap' do
   # redirect to("/#{@image}") unless request.xhr?
   if cached? @image 
     redirect to("/#{@image}")
+    return
   end
 
   snap @image, params[:url], '1440', '900'
