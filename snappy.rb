@@ -162,7 +162,7 @@ not_found do
 end
 
 error do
-  halt 500, 'Sorry there was a nasty error - ' + env['sinatra.error'].name
+  halt 500, 'Sorry there was a nasty error - ' + env['sinatra.error'].message
 end
 
 ##TODO
