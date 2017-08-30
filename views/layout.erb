@@ -5,7 +5,40 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Snappy</title>
-	
+	<style>
+	body{font-family:Roboto, sans-serif;color:rgb(0,0,50);}
+a{text-decoration:none;color:white;}
+p{font-weight:lighter;letter-spacing:normal;}
+h2{letter-spacing:normal;}
+hr{color:#d3d3d3;max-width:940px;margin-top:1px;}
+h1{margin-top:0px;padding-top:40px;margin-bottom:20px;font-size:160px;font-weight:bold;text-align:center;text-transform:uppercase;color:white;}
+form{margin:40px;}
+footer{background-color:white;position:fixed;bottom:0px;width:100%;font-size:small}
+#foot{margin:0px auto;max-width:940px;}
+footer a{text-decoration:underline;color:rgb(0,0,50);}
+footer a:hover{color:grey;}
+code{font-weight:bolder;}
+#search{-webkit-appearance:none;background-color:rgba(255,255,255,0.05);border:3px solid white;width:400px;height:30px;color:white;font-size:11px;padding-left:15px;}
+.snap{border:1px #d3d3d3 solid;}
+.mobile{float:right;}
+.desktop{float:left;}
+.box{background-color:rgb(0,0,50);margin:10px;margin-bottom:20px;border:1px #d3d3d3 solid;}
+#container{}
+#main{margin:0px auto;padding-top:15px;padding-bottom:30px;max-width:1000px;letter-spacing:8px;text-align:center;font-weight:bold;}
+#header{text-align:center;height:400px;background-image:url('../bg.jpg');background-origin:padding-box;background-size:cover;}
+#desc{font-weight:500;height:18px;letter-spacing:8px;margin-bottom:60px;margin-top:0px;text-align:center;text-transform:uppercase;color:white;}
+@media screen and (max-width:844px){.mobile, .desktop{clear:both;float:none;}
+}
+@media screen and (max-width:680px){#desc{font-size:11px;margin-bottom:50px;}
+h1{font-size:120px;margin-bottom:30px;padding-top:50px;}
+.box{width:95%;}
+}
+@media screen and (max-width:480px){h1{font-size:90px;margin-bottom:40px;padding-top:60px;}
+#search{width:90%;}
+#desc{margin-bottom:70px;}
+.box{width:95%;}
+.desktop img{width:100%;}
+}</style>
 
 	<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"> -->
 
@@ -36,7 +69,21 @@
 			<a href="/api">API</a> <a href="/about">About</a> <a href="https://packmule.ca/contact/">Contact</a> <a href="https://alessandrominali.github.io">Blog</a><span style="float:right;">By <a href="https://packmule.ca/about/">Alessandro Minali</a> 2017</span>
 		</div>
 	</footer>
-	<link rel="stylesheet" href="css/normalize.css">
-	<link rel="stylesheet" href="css/style.css">
+	<noscript id="deferred-styles">
+      <link rel="stylesheet" href="css/normalize.css">
+    </noscript>
+    <script>
+      var loadDeferredStyles = function() {
+        var addStylesNode = document.getElementById("deferred-styles");
+        var replacement = document.createElement("div");
+        replacement.innerHTML = addStylesNode.textContent;
+        document.body.insertBefore(addStylesNode);
+        addStylesNode.parentElement.removeChild(addStylesNode);
+      };
+      var raf = requestAnimationFrame || mozRequestAnimationFrame ||
+          webkitRequestAnimationFrame || msRequestAnimationFrame;
+      if (raf) raf(function() { window.setTimeout(loadDeferredStyles, 0); });
+      else window.addEventListener('load', loadDeferredStyles);
+    </script>
 </body>
 </html>
