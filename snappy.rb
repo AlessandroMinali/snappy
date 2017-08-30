@@ -8,7 +8,6 @@ require 'pry'
 use Rack::Deflater
 
 # rubocop:disable LineLength
-# rubocop:disable Metrics/BlockLength
 
 DataMapper.setup(:default, ENV['HEROKU_POSTGRESQL_TEAL_URL'] ||
                            "sqlite3://#{Dir.pwd}/gallery.db")
@@ -39,20 +38,11 @@ helpers do
 
   def cached?(image)
     screen_shot = Snapshot.first(name: image)
-    if screen_shot
-      refresh_snap(screen_shot)
+    if screen_shot && screen_shot.updated_at.to_time < (Time.now - 180)
       true
     else
       false
     end
-  end
-
-  def refresh_snap(image)
-    return unless image.updated_at.to_time < Time.now - 180
-    snap image, params[:url], '1440', '900'
-    snap '2' + image, params[:url], '640', '960', true
-    image.updated_at = Time.now
-    image.save
   end
 
   def snap(name, url, x, y, mobile = nil)
@@ -65,7 +55,7 @@ helpers do
 end
 
 after do
-  images = Snapshot.all :created_at.lt => Time.now - 1800
+  images = Snapshot.all :created_at.lt => (Time.now - 1800)
   JSON.parse(images.to_json).each do |image|
     begin
       File.delete "./public/#{image['name']}.png"
@@ -84,15 +74,6 @@ end
 
 post '/snap' do
   @image = params['url'].split('//')[-1]
-
-  if cached? @image
-    redirect to("/#{@image}")
-    return
-  end
-
-  snap @image, params[:url], '1440', '900'
-  snap '2' + @image, params[:url], '640', '960', true
-
   redirect to("/#{@image}")
 end
 
