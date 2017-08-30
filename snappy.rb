@@ -45,7 +45,7 @@ helpers do
   end
 
   def refresh_snap(image)
-    return unless image.updated_at.to_time < Time.now - 60
+    return unless image.updated_at.to_time < Time.now - 180
     snap image, params[:url], '1440', '900'
     snap '2' + image, params[:url], '640', '960', true
     image.updated_at = Time.now
@@ -62,7 +62,7 @@ helpers do
 end
 
 after do
-  images = Snapshot.all :created_at.lt => Time.now - 1_209_600
+  images = Snapshot.all :created_at.lt => Time.now - 1800
   JSON.parse(images.to_json).each do |image|
     File.delete "./public/#{image['name']}.png"
     begin
@@ -74,11 +74,6 @@ after do
   images.destroy
 end
 
-before '/' do
-  next unless request.post?
-  redirect to('/'), 'whoops!' unless params['url'] =~ /\A#{URI.regexp(%w[http https])}\z/
-end
-
 get '/' do
   @snaps = Snapshot.all limit: 6, order: :updated_at.desc
   erb :index
@@ -87,17 +82,14 @@ end
 post '/snap' do
   @image = params['url'].split('//')[-1]
 
-  # redirect to("/#{@image}") unless request.xhr?
   if cached? @image
     redirect to("/#{@image}")
     return
   end
 
   snap @image, params[:url], '1440', '900'
-
   snap '2' + @image, params[:url], '640', '960', true
 
-  # 'status 200'
   redirect to("/#{@image}")
 end
 
