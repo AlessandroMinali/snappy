@@ -1,15 +1,43 @@
-<script type="text/javascript" src="script/snaps.js"></script>
 <div id="container">
 	<h2><%= h params[:image] %></h2>
 
 	<div class="snap desktop" style="overflow: hidden;height: 400px;">
 		<p>Desktop (1440x900):</p>
-		<a href="/desktop/<%= @image %>.png"><img width=640 src="<%= @image %>.png" /></a>
+		<a href="/desktop/<%= @image %>.png"><img id="desktop" style="width: 600px;" /></a>
 	</div>
 	<div class="snap mobile" style="overflow: hidden;height: 400px;">
 		<p>Mobile (640x960):</p>
-		<a href="/mobile/<%= @image %>.png"><img width=200 src="2<%= @image %>.png" /></a>
+		<a href="/mobile/<%= @image %>.png"><img id="mobile" style="width: 300px;" /></a>
 	</div>
 </div>
-
+<style>
+img {
+  width: 640px;
+  height: 450px;
+  background: url(/images/loading.gif) 50% no-repeat;
+  border: 1px solid black;
+  border-radius: 5px;
+}
+</style>
+<script>
+window.onload = function(e){
+var xhr = new XMLHttpRequest();
+xhr.open('GET', '/api/<%= params[:image]%>');
+xhr.send(null);
+xhr.onreadystatechange = function () {
+  var DONE = 4; // readyState 4 means the request is done.
+  var OK = 200; // status 200 is a successful return.
+  if (xhr.readyState === DONE) {
+    if (xhr.status === OK) {
+      resp = JSON.parse(xhr.responseText);
+      document.images[0].style.height = 'auto';
+      document.images[1].style.height = 'auto';
+      document.images[0].src=resp['desktop'].replace('\/desktop','');
+      document.images[1].src=resp['mobile'].replace('\/mobile','');
+    } else {
+      alert('Timeout'); // An error occurred during the request.
+    }
+  }
+};}
+</script>
 <div style="clear: both;"></div>

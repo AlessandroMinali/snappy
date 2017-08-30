@@ -48,7 +48,7 @@ helpers do
   def snap(name, url, x, y, mobile = nil)
     agent = mobile ? 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:35.0) Gecko/20100101 Firefox/35.0' : 'Mozilla/5.0 (iPhone; CPU iPhone OS 8_1_2 like Mac OS X) AppleWebKit/600.1.4 (KHTML, like Gecko) Version/8.0 Mobile/12B440 Safari/600.1.4'
     Phantomjs.run('./public/script/peek.js', url, x, y, "./public/#{name}.png", agent) do |k|
-      return redirect to('/timeout') if k.chomp.include? 'timeout'
+      return false if k.chomp.include? 'timeout'
       store @image if k.chomp.include? 'done'
     end
   end
@@ -105,28 +105,31 @@ end
 
 get '/api/:url/?:format?' do
   content_type :json
-  @image = params[:url].split('//')[-1]
+  @image = params[:url].split('//')[-1].strip
 
   params[:url] = 'http://' + params[:url] if params[:url].split('//').length < 2
 
   if cached? @image
-    return { url: params[:url].to_s, desktop: "#{request.host}/desktop/#{@image}.png", mobile: "#{request.host}/mobile/#{@image}.png" }.to_json
+    return { url: params[:url].to_s, desktop: "/desktop/#{@image}.png", mobile: "/mobile/#{@image}.png" }.to_json
   end
 
   @d = nil
   @m = nil
+  status = nil
 
   if params[:format].nil? || params[:format] == 'desktop'
-    snap @image, params[:url], '1440', '900'
+    status = snap @image, params[:url], '1440', '900'
     @d = "/desktop/#{@image}.png"
   end
 
   if params[:format].nil? || params[:format] == 'mobile'
-    snap '2' + @image, params[:url], '640', '960', true
+    status = snap '2' + @image, params[:url], '640', '960', true
     @m = "/mobile/#{@image}.png"
   end
 
-  { url: params[:url].to_s, desktop: (request.host + @d unless @d.nil?).to_s, mobile: (request.host + @m unless @m.nil?).to_s }.to_json
+  halt 404 unless status
+
+  { url: params[:url].to_s, desktop: (@d unless @d.nil?).to_s, mobile: (@m unless @m.nil?).to_s }.to_json
 end
 
 not_found do
