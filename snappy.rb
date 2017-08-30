@@ -67,8 +67,8 @@ end
 after do
   images = Snapshot.all :created_at.lt => Time.now - 1800
   JSON.parse(images.to_json).each do |image|
-    File.delete "./public/#{image['name']}.png"
     begin
+      File.delete "./public/#{image['name']}.png"
       File.delete "./public/2#{image['name']}.png"
     rescue
       'file not found'
