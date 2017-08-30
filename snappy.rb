@@ -4,6 +4,9 @@ require 'uri'
 require 'data_mapper'
 require 'json'
 require 'pry'
+
+use Rack::Deflater
+
 # rubocop:disable LineLength
 # rubocop:disable Metrics/BlockLength
 
