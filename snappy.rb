@@ -71,7 +71,7 @@ after do
       'file not found'
     end
   end
-  image.destroy
+  images.destroy
 end
 
 before '/' do
@@ -158,7 +158,7 @@ not_found do
 end
 
 error do
-  halt 500, 'Sorry there was a nasty error - ' + env['sinatra.error'].message
+  halt 500, 'Sorry there was a nasty error'
 end
 
 # #TODO
