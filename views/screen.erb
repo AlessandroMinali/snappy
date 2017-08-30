@@ -1,5 +1,5 @@
 <div id="container">
-	<h2><%= h params[:image] %></h2>
+	<h2><%= h params[:image] %> <span id="warning">- may take up to 30 seconds</span></h2>
 
 	<div class="snap desktop" style="overflow: hidden;height: 400px;">
 		<p>Desktop (1440x900):</p>
@@ -30,6 +30,7 @@ xhr.onreadystatechange = function () {
   if (xhr.readyState === DONE) {
     if (xhr.status === OK) {
       resp = JSON.parse(xhr.responseText);
+      document.getElementById('warning').remove();
       document.images[0].style.height = 'auto';
       document.images[1].style.height = 'auto';
       document.images[0].src=resp['desktop'].replace('\/desktop','');
