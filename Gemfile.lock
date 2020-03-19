@@ -79,12 +79,12 @@ GEM
       method_source (~> 0.8.1)
       slop (~> 3.4)
     public_suffix (3.0.0)
-    rack (2.0.6)
+    rack (2.2.2)
     rack-protection (2.0.4)
       rack
     rainbow (2.2.2)
       rake
-    rake (12.0.0)
+    rake (13.0.1)
     rubocop (0.49.1)
       parallel (~> 1.10)
       parser (>= 2.3.3.1, < 3.0)
@@ -126,4 +126,4 @@ RUBY VERSION
    ruby 2.5.0p0
 
 BUNDLED WITH
-   1.16.1
+   1.16.6
