@@ -115,7 +115,6 @@ DEPENDENCIES
   data_mapper
   dm-postgres-adapter
   dm-sqlite-adapter
-  json
   phantomjs
   pry
   rubocop
@@ -123,7 +122,7 @@ DEPENDENCIES
   thin
 
 RUBY VERSION
-   ruby 2.5.0p0
+   ruby 2.7.0p0
 
 BUNDLED WITH
-   1.16.6
+   2.1.4
